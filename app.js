@@ -55,11 +55,7 @@ function draw() {
     const items = products.length
       ? products.map(product => {
           const price = product.price_mxn !== '' && product.price_mxn != null
-            ? 'MXN 
-}
-
-load();
- + fmt(product.price_mxn)
+            ? 'MXN $' + fmt(product.price_mxn)
             : '—';
 
           return '<div class="product">' +
