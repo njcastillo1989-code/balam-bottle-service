@@ -1,1 +1,354 @@
-:root{color-scheme:dark;--gold:#ffd477;--bright:#ffad31;--line:#dba74b}*{box-sizing:border-box}body{margin:0;background:#030201;color:#ffe9b0;font-family:Arial,Helvetica,sans-serif;background-image:radial-gradient(ellipse at 50% 0%,#58300e55,transparent 60%),radial-gradient(ellipse at 50% 100%,#42230d55,transparent 55%)}.shell{max-width:1320px;margin:auto;min-height:100vh;padding:12px 22px 25px;border:3px double #ad6a1d;box-shadow:inset 0 0 26px #ad6a1d55}.masthead{text-align:center;position:relative;padding:8px 0 0;overflow:hidden;background:radial-gradient(ellipse at 50% 10%,#7e410b99,transparent 58%)}.jaguar{height:92px;background:url('assets/carta-original.jpeg') center 3% / 670px auto no-repeat;filter:drop-shadow(0 0 10px #fda52b)}.brand{font-size:clamp(48px,8vw,92px);font-weight:300;letter-spacing:.16em;line-height:1;color:#ffcf69;text-shadow:0 0 7px #f99c1a,0 0 22px #dc7615}.club{font-size:16px;letter-spacing:.65em;font-weight:800}.masthead h1{font-size:clamp(28px,5vw,55px);letter-spacing:.06em;color:#ffda87;text-shadow:0 2px 0 #874900,0 0 12px #df8c21;margin:15px 0 8px}.rule{height:3px;background:linear-gradient(90deg,transparent,#ffcd68,transparent);margin:0 2% 18px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 2% 14px}.toolbar button{cursor:pointer;color:#ffe7ad;background:#191009;border:1px solid #b57c29;padding:9px 15px;font-weight:bold}.toolbar button.active{background:#b6781f;color:#090604}.note{font-size:13px}.menu{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;align-items:start}.category{border:2px solid #e9b65b;border-radius:17px;box-shadow:0 0 13px #ffb32c77,inset 0 0 10px #ba6a0b33;background:linear-gradient(130deg,#120903ee,#060403ee);padding:16px 15px 14px;min-width:0}.category h2{text-align:center;margin:-32px auto 13px;background:#100803;border:2px solid #f0bf65;box-shadow:0 0 10px #e99724;border-radius:12px;max-width:max-content;padding:5px 20px;color:#ffd789;letter-spacing:.09em;font-size:clamp(17px,2vw,24px)}.category{margin-top:24px}.product{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:4px 0;font-size:clamp(14px,1.5vw,19px);font-weight:700}.product .name{overflow-wrap:anywhere}.price{text-align:right;white-space:nowrap;color:#ffdc8c}.usd{display:block;font-size:12px;color:#c8ac7b;font-weight:normal}.empty{text-align:center;color:#b49c6d}.loading{grid-column:1/-1;text-align:center}footer{text-align:center;color:#b88e4e;letter-spacing:.15em;padding:35px 5px 10px;font-size:12px}@media(max-width:950px){.menu{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.shell{padding:9px 12px}.menu{grid-template-columns:1fr;gap:9px}.category{padding:15px 14px}.category h2{font-size:19px}.product{font-size:16px}.jaguar{background-size:540px auto;height:80px}.club{letter-spacing:.35em}}
+
+:root {
+  color-scheme: dark;
+  --gold: #ffd477;
+  --bright: #ffad31;
+  --line: #dba74b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #030201;
+  color: #ffe9b0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.shell {
+  position: relative;
+  width: 100%;
+  max-width: 1500px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 0 24px 30px;
+  border: 3px double #dba74b;
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, .12),
+      rgba(0, 0, 0, .24)
+    ),
+    url("assets/carta-original.jpeg")
+      center top / 100% 100% no-repeat,
+    #050301;
+  box-shadow:
+    inset 0 0 28px #ffad3155,
+    0 0 18px #b56d1644;
+}
+
+/* ENCABEZADO ORIGINAL BALAM */
+
+.masthead {
+  position: relative;
+  height: clamp(260px, 25vw, 365px);
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-align: center;
+  background: transparent;
+}
+
+.jaguar {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  background:
+    url("assets/carta-original.jpeg")
+    center top / 100% auto no-repeat;
+  filter: none;
+}
+
+.brand,
+.club {
+  display: none;
+}
+
+.masthead h1 {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 12px;
+  color: #ffda87;
+  font-size: clamp(25px, 4vw, 55px);
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-shadow:
+    0 2px 0 #874900,
+    0 0 12px #df8c21;
+}
+
+.rule {
+  height: 3px;
+  margin: 6px 1% 22px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #ffcd68,
+    transparent
+  );
+}
+
+/* IDIOMAS */
+
+.toolbar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 0 1% 20px;
+}
+
+#langs {
+  display: flex;
+  gap: 0;
+}
+
+.toolbar button {
+  cursor: pointer;
+  color: #ffe7ad;
+  background: #100803;
+  border: 1px solid #b57c29;
+  padding: 9px 15px;
+  font-weight: bold;
+}
+
+.toolbar button.active {
+  background: #b6781f;
+  color: #090604;
+}
+
+.note {
+  font-size: 13px;
+}
+
+/* DISTRIBUCIÓN DE CATEGORÍAS */
+
+.menu {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1.05fr)
+    minmax(0, 1fr);
+  grid-template-areas:
+    "champagne tequila cognac"
+    "vodka tequila whisky"
+    ". tequila gin";
+  gap: 18px;
+  align-items: start;
+}
+
+.category {
+  position: relative;
+  min-width: 0;
+  margin-top: 16px;
+  padding: 23px 16px 16px;
+  border: 2px solid #e9b65b;
+  border-radius: 17px;
+  background:
+    linear-gradient(
+      130deg,
+      rgba(18, 9, 3, .94),
+      rgba(6, 4, 3, .92)
+    );
+  box-shadow:
+    0 0 13px #ffb32c77,
+    inset 0 0 10px #ba6a0b33;
+}
+
+.category-champagne {
+  grid-area: champagne;
+}
+
+.category-vodka {
+  grid-area: vodka;
+}
+
+.category-tequila {
+  grid-area: tequila;
+  align-self: stretch;
+}
+
+.category-cognac {
+  grid-area: cognac;
+}
+
+.category-whisky {
+  grid-area: whisky;
+}
+
+.category-gin {
+  grid-area: gin;
+}
+
+.category-other {
+  grid-column: auto;
+}
+
+/* TÍTULOS DORADOS */
+
+.category h2 {
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+  margin: -43px auto 15px;
+  padding: 5px 20px;
+  border: 2px solid #f0bf65;
+  border-radius: 12px;
+  background: #100803;
+  color: #ffd789;
+  font-size: clamp(17px, 2vw, 24px);
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-align: center;
+  box-shadow:
+    0 0 10px #e99724,
+    inset 0 0 8px #c57b2333;
+}
+
+/* PRODUCTOS Y PRECIOS */
+
+.product {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 4px 0;
+  font-size: clamp(14px, 1.4vw, 19px);
+  font-weight: 700;
+}
+
+.product .name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.price {
+  flex-shrink: 0;
+  text-align: right;
+  white-space: nowrap;
+  color: #ffdc8c;
+}
+
+.usd {
+  display: block;
+  font-size: 12px;
+  font-weight: normal;
+  color: #c8ac7b;
+}
+
+.empty {
+  text-align: center;
+  color: #b49c6d;
+}
+
+.loading {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+/* PIE DE PÁGINA */
+
+footer {
+  margin-top: 30px;
+  padding: 22px 5px 10px;
+  color: #b88e4e;
+  font-size: 12px;
+  letter-spacing: .15em;
+  text-align: center;
+}
+
+/* TABLETAS */
+
+@media (max-width: 950px) {
+  .shell {
+    padding: 0 14px 25px;
+  }
+
+  .menu {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: none;
+    gap: 16px;
+  }
+
+  .category {
+    grid-area: auto;
+    align-self: start;
+  }
+
+  .category-other {
+    grid-column: auto;
+  }
+
+  .masthead {
+    height: clamp(180px, 28vw, 260px);
+  }
+}
+
+/* CELULARES */
+
+@media (max-width: 600px) {
+  .shell {
+    padding: 0 12px 20px;
+    background-size: auto 100%, cover;
+  }
+
+  .masthead {
+    height: clamp(130px, 34vw, 200px);
+  }
+
+  .masthead h1 {
+    font-size: clamp(19px, 5vw, 28px);
+  }
+
+  .rule {
+    margin-bottom: 16px;
+  }
+
+  .toolbar {
+    margin-bottom: 22px;
+  }
+
+  .toolbar button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .menu {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: none;
+    gap: 14px;
+  }
+
+  .category {
+    grid-area: auto;
+    margin-top: 14px;
+    padding: 20px 13px 13px;
+  }
+
+  .category h2 {
+    margin-top: -38px;
+    font-size: 19px;
+  }
+
+  .product {
+    font-size: 16px;
+  }
+
+  footer {
+    font-size: 10px;
+  }
+}
