@@ -29,86 +29,99 @@ body {
   margin: auto;
   padding: 0 24px 30px;
   border: 3px double #dba74b;
+
   background:
-    linear-gradient(
-      rgba(0, 0, 0, .12),
-      rgba(0, 0, 0, .24)
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(112, 54, 8, 0.30),
+      transparent 55%
     ),
-    url("assets/carta-original.jpeg")
-      center top / 100% 100% no-repeat,
-    #050301;
+    linear-gradient(
+      180deg,
+      #100802 0%,
+      #030201 65%,
+      #080401 100%
+    );
+
   box-shadow:
     inset 0 0 28px #ffad3155,
     0 0 18px #b56d1644;
 }
 
-/* ENCABEZADO ORIGINAL BALAM */
+/* =================================
+   ENCABEZADO BALAM
+================================= */
 
 .masthead {
   position: relative;
-  height: clamp(260px, 25vw, 365px);
-  padding: 0;
+  height: clamp(210px, 23vw, 310px);
   margin: 0;
+  padding: 0;
   overflow: hidden;
   text-align: center;
   background: transparent;
 }
 
+/*
+  Imagen original únicamente
+  dentro del encabezado.
+  No se usa como fondo del menú.
+*/
+
 .jaguar {
   position: absolute;
   inset: 0;
+  width: 100%;
   height: 100%;
-  background:
-    url("assets/carta-original.jpeg")
-    center top / 100% auto no-repeat;
-  filter: none;
+
+  background-image:
+    url("assets/carta-original.jpeg");
+
+  background-position: center top;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
 }
+
+/*
+  El logo y título ya aparecen
+  dentro de la imagen original.
+*/
 
 .brand,
-.club {
-  display: none;
-}
-
+.club,
 .masthead h1 {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: max-content;
-  max-width: 100%;
-  margin: 0;
-  padding: 0 12px;
-  color: #ffda87;
-  font-size: clamp(25px, 4vw, 55px);
-  font-weight: 900;
-  letter-spacing: .07em;
-  text-shadow:
-    0 2px 0 #874900,
-    0 0 12px #df8c21;
+  display: none;
 }
 
 .rule {
   height: 3px;
-  margin: 6px 1% 22px;
+  margin: 8px 1% 25px;
+
   background: linear-gradient(
     90deg,
     transparent,
     #ffcd68,
     transparent
   );
+
+  box-shadow: 0 0 10px #d98b28;
 }
 
-/* IDIOMAS */
+/* =================================
+   SELECTOR DE IDIOMAS
+================================= */
 
 .toolbar {
   position: relative;
   z-index: 2;
+
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 12px;
   flex-wrap: wrap;
-  margin: 0 1% 20px;
+
+  gap: 12px;
+  margin: 0 1% 30px;
 }
 
 #langs {
@@ -118,51 +131,77 @@ body {
 
 .toolbar button {
   cursor: pointer;
+
+  padding: 10px 16px;
+
   color: #ffe7ad;
   background: #100803;
+
   border: 1px solid #b57c29;
-  padding: 9px 15px;
+
+  font-size: 13px;
   font-weight: bold;
+
+  transition: 0.2s ease;
+}
+
+.toolbar button:hover {
+  background: #51300c;
 }
 
 .toolbar button.active {
-  background: #b6781f;
   color: #090604;
+  background: #e7ad40;
 }
 
 .note {
   font-size: 13px;
+  color: #d8b875;
 }
 
-/* DISTRIBUCIÓN DE CATEGORÍAS */
+/* =================================
+   DISTRIBUCIÓN DEL MENÚ
+================================= */
 
 .menu {
   display: grid;
+
   grid-template-columns:
     minmax(0, 1fr)
     minmax(0, 1.05fr)
     minmax(0, 1fr);
+
   grid-template-areas:
     "champagne tequila cognac"
     "vodka tequila whisky"
     ". tequila gin";
-  gap: 18px;
+
+  gap: 22px;
+
   align-items: start;
 }
 
+/* =================================
+   CAJAS DE CATEGORÍAS
+================================= */
+
 .category {
   position: relative;
+
   min-width: 0;
-  margin-top: 16px;
-  padding: 23px 16px 16px;
+  margin-top: 20px;
+  padding: 24px 16px 18px;
+
   border: 2px solid #e9b65b;
   border-radius: 17px;
+
   background:
     linear-gradient(
       130deg,
-      rgba(18, 9, 3, .94),
-      rgba(6, 4, 3, .92)
+      rgba(18, 9, 3, 0.97),
+      rgba(6, 4, 3, 0.97)
     );
+
   box-shadow:
     0 0 13px #ffb32c77,
     inset 0 0 10px #ba6a0b33;
@@ -197,35 +236,50 @@ body {
   grid-column: auto;
 }
 
-/* TÍTULOS DORADOS */
+/* =================================
+   TÍTULOS DE CATEGORÍAS
+================================= */
 
 .category h2 {
   position: relative;
+
   width: max-content;
   max-width: 100%;
-  margin: -43px auto 15px;
-  padding: 5px 20px;
+
+  margin: -44px auto 16px;
+  padding: 6px 20px;
+
   border: 2px solid #f0bf65;
   border-radius: 12px;
+
   background: #100803;
+
   color: #ffd789;
+
   font-size: clamp(17px, 2vw, 24px);
   font-weight: 900;
-  letter-spacing: .06em;
+
+  letter-spacing: 0.06em;
   text-align: center;
+
   box-shadow:
-    0 0 10px #e99724,
+    0 0 12px #e99724,
     inset 0 0 8px #c57b2333;
 }
 
-/* PRODUCTOS Y PRECIOS */
+/* =================================
+   PRODUCTOS Y PRECIOS
+================================= */
 
 .product {
   display: flex;
+
   justify-content: space-between;
   align-items: baseline;
-  gap: 10px;
+
+  gap: 12px;
   padding: 4px 0;
+
   font-size: clamp(14px, 1.4vw, 19px);
   font-weight: 700;
 }
@@ -238,21 +292,25 @@ body {
 
 .price {
   flex-shrink: 0;
+
+  color: #ffdc8c;
+
   text-align: right;
   white-space: nowrap;
-  color: #ffdc8c;
 }
 
 .usd {
   display: block;
+
   font-size: 12px;
   font-weight: normal;
+
   color: #c8ac7b;
 }
 
 .empty {
-  text-align: center;
   color: #b49c6d;
+  text-align: center;
 }
 
 .loading {
@@ -260,92 +318,123 @@ body {
   text-align: center;
 }
 
-/* PIE DE PÁGINA */
+/* =================================
+   PIE DE PÁGINA
+================================= */
 
 footer {
-  margin-top: 30px;
-  padding: 22px 5px 10px;
+  margin-top: 35px;
+  padding: 25px 5px 12px;
+
   color: #b88e4e;
+
   font-size: 12px;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
+
   text-align: center;
 }
 
-/* TABLETAS */
+/* =================================
+   TABLETAS
+================================= */
 
 @media (max-width: 950px) {
+
   .shell {
     padding: 0 14px 25px;
   }
 
-  .menu {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-areas: none;
-    gap: 16px;
-  }
-
-  .category {
-    grid-area: auto;
-    align-self: start;
-  }
-
-  .category-other {
-    grid-column: auto;
-  }
-
   .masthead {
-    height: clamp(180px, 28vw, 260px);
+    height: clamp(170px, 23vw, 250px);
+  }
+
+  .menu {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    grid-template-areas: none;
+
+    gap: 20px;
+  }
+
+  .category,
+  .category-champagne,
+  .category-vodka,
+  .category-tequila,
+  .category-cognac,
+  .category-whisky,
+  .category-gin,
+  .category-other {
+    grid-area: auto;
+    grid-column: auto;
+    align-self: start;
   }
 }
 
-/* CELULARES */
+/* =================================
+   CELULARES
+================================= */
 
 @media (max-width: 600px) {
+
   .shell {
     padding: 0 12px 20px;
-    background-size: auto 100%, cover;
   }
 
   .masthead {
-    height: clamp(130px, 34vw, 200px);
+    height: clamp(110px, 23vw, 165px);
   }
 
-  .masthead h1 {
-    font-size: clamp(19px, 5vw, 28px);
+  .jaguar {
+    background-position: center top;
+    background-size: 100% auto;
   }
 
   .rule {
-    margin-bottom: 16px;
+    margin: 6px 1% 20px;
   }
 
   .toolbar {
-    margin-bottom: 22px;
+    margin-bottom: 30px;
   }
 
   .toolbar button {
-    padding: 8px 12px;
+    padding: 9px 12px;
     font-size: 12px;
   }
 
   .menu {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns:
+      minmax(0, 1fr);
+
     grid-template-areas: none;
-    gap: 14px;
+
+    gap: 18px;
   }
 
-  .category {
+  .category,
+  .category-champagne,
+  .category-vodka,
+  .category-tequila,
+  .category-cognac,
+  .category-whisky,
+  .category-gin,
+  .category-other {
     grid-area: auto;
-    margin-top: 14px;
-    padding: 20px 13px 13px;
+    grid-column: auto;
+
+    margin-top: 16px;
+    padding: 22px 13px 15px;
   }
 
   .category h2 {
-    margin-top: -38px;
+    margin-top: -40px;
     font-size: 19px;
   }
 
   .product {
     font-size: 16px;
+    gap: 8px;
   }
 
   footer {
