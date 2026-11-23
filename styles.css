@@ -392,17 +392,18 @@ footer {
   height: 100%;
 }
 
-.balam-lit {
+.balam-darkout {
+  opacity: 0;
   animation: balam-short-circuit 4.1s steps(1, end) infinite;
 }
 
 @keyframes balam-short-circuit {
-  0%, 12%, 14%, 40%, 43%, 72%, 75%, 100% { opacity: 1; }
-  13%, 41%, 74% { opacity: 0; }
-  46% { opacity: .28; }
-  48% { opacity: .92; }
-  50% { opacity: .16; }
-  53% { opacity: 1; }
+  0%, 12%, 14%, 40%, 43%, 72%, 75%, 100% { opacity: 0; }
+  13%, 41%, 74% { opacity: .92; }
+  46% { opacity: .65; }
+  48% { opacity: .08; }
+  50% { opacity: .84; }
+  53% { opacity: 0; }
 }
 
 .menu,
@@ -412,6 +413,6 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .category,
-  .balam-lit { animation: none; }
+  .category { animation: none; }
+  .balam-darkout { animation: none; opacity: 0; }
 }
