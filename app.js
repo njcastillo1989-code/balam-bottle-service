@@ -67,7 +67,13 @@ function draw() {
 
     const markup = '<section class="category category-' + type +
       '" data-category="' + safe(category.name) + '">' +
-      '<span class="roaming-jaguar" aria-hidden="true">🐆</span>' +
+      '<span class="roaming-jaguar" aria-hidden="true"><svg viewBox="0 0 64 36" focusable="false">
+        <path class="jaguar-tail" d="M14 17C7 14 4 12 5 8c1-3 5-3 7 0" />
+        <path class="jaguar-body" d="M9 19c2-7 10-11 20-10 7 0 12 3 17 5 4-2 8-1 10 2l6 2 1 4-7 2-5-2c-2 5-6 7-11 6l-5 1-2 6h-4l-1-7-8-1-3 7h-4l1-9-5-1-2 5H4l2-7-4-3 1-3 4 1z" />
+        <path class="jaguar-spots" d="M17 14l2-2 2 2-2 2zm7-3 2-2 2 2-2 2zm7 1 2-2 2 2-2 2zm7 2 2-2 2 2-2 2z" />
+        <circle class="jaguar-ear" cx="51" cy="12" r="2.3" />
+        <circle class="jaguar-eye" cx="57" cy="17" r="1" />
+      </svg></span>' +
       '<h2>' + safe(category.name) + '</h2>' + items + '</section>';
 
     const column = type === 'champagne' || type === 'vodka' ? 0
