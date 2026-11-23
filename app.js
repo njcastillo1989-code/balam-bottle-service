@@ -67,6 +67,7 @@ function draw() {
 
     const markup = '<section class="category category-' + type +
       '" data-category="' + safe(category.name) + '">' +
+      '<span class="roaming-jaguar" aria-hidden="true">🐆</span>' +
       '<h2>' + safe(category.name) + '</h2>' + items + '</section>';
 
     const column = type === 'champagne' || type === 'vodka' ? 0
