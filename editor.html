@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080502">
+<title>Editar menú · BALAM</title>
+<style>
+:root{color-scheme:dark;--gold:#f4bd48;--cream:#ffe7ad}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#2b1806,#080502 48rem);color:var(--cream);font:16px/1.45 system-ui,sans-serif}
+main{width:min(100% - 24px,900px);margin:auto;padding:24px 0 60px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+h1,h2{color:var(--gold);margin:0 0 12px}
+h1{font-size:clamp(1.5rem,5vw,2.4rem)}
+h2{font-size:1.2rem}
+a{color:var(--gold)}
+.panel,.category{background:#120c05;border:1px solid #8f641d;border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 0 20px #e8a8241c}
+p{margin:.5rem 0 1rem}
+label{display:block;font-weight:650;margin:10px 0 6px}
+input{width:100%;min-width:0;background:#090704;color:#fff0c7;border:1px solid #77551f;border-radius:8px;padding:10px;font:inherit}
+input:focus{outline:2px solid var(--gold)}
+button{background:#261604;color:#ffe7a8;border:1px solid var(--gold);border-radius:8px;padding:10px 13px;font:inherit;font-weight:700;cursor:pointer}
+button:disabled{opacity:.55;cursor:wait}
+button.danger{border-color:#9e5142;background:#210c08;color:#ffc6b7}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.status{min-height:1.4em;font-size:.93rem}.error{color:#ffb0a0}.ok{color:#b9e8aa}
+.hint{font-size:.9rem;color:#e4cf9f}
+.remember{display:flex;align-items:center;gap:8px;font-weight:400}
+.remember input{width:auto}
+#editor[hidden]{display:none}
+.category-head{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;margin-bottom:10px}
+.category-head label{margin:0}
+.category-head input{font-size:1.05rem;font-weight:750;color:var(--gold)}
+.product-head,.product{display:grid;grid-template-columns:minmax(0,1fr) 150px auto;gap:9px;align-items:center}
+.product-head{font-size:.84rem;color:#c8a962;padding:4px 0}
+.product{border-top:1px solid #3e2d14;padding:7px 0}
+.product input{padding:9px}
+.price{position:relative}.price span{position:absolute;left:10px;top:50%;transform:translateY(-50%);pointer-events:none;color:#d5b966}.price input{padding-left:28px}
+@media(max-width:580px){main{padding-top:15px}.panel,.category{padding:14px}.product-head{display:none}.product{grid-template-columns:minmax(0,1fr) 105px auto;gap:6px}.product input{font-size:.9rem}.category-head button{font-size:.82rem;padding:8px}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>Editar menú Balam</h1><a href="./">← Volver al menú</a></header>
+<section class="panel" id="login">
+<h2>Conectar con GitHub</h2>
+<p>Haz esto una sola vez para crear tu acceso: <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">crear token fine-grained</a>. Selecciona el repositorio <b>balam-bottle-service</b> y activa únicamente <b>Contents: Read and write</b>. Copia el token y pégalo abajo.</p>
+<label for="token">Token de GitHub</label>
+<input id="token" type="password" autocomplete="off" placeholder="github_pat_…" spellcheck="false">
+<label class="remember"><input id="remember" type="checkbox" checked> Recordar en este dispositivo</label>
+<div class="actions"><button id="connect">Conectar y cargar menú</button></div>
+<p class="hint">El token solo se usa desde este navegador para comunicarte con GitHub; nunca se escribe dentro de la página. No compartas este token. Puedes borrarlo con “Desconectar”.</p>
+<p id="login-status" class="status" role="status"></p>
+</section>
+<section id="editor" hidden>
+<div class="panel">
+<h2>Productos y categorías</h2>
+<p>Los precios se guardan solamente en MXN. Pulsa “Guardar y publicar” cuando termines.</p>
+<div class="actions"><button id="add-category">＋ Agregar categoría</button><button id="save">Guardar y publicar</button><button id="logout" class="danger">Desconectar</button></div>
+<p id="save-status" class="status" role="status"></p>
+</div>
+<div id="categories"></div>
+</section>
+</main>
+<script>
+(() => {
+const repo='njcastillo1989-code/balam-bottle-service', branch='main';
+const tokenInput=document.getElementById('token'), loginStatus=document.getElementById('login-status');
+const saveStatus=document.getElementById('save-status'), editor=document.getElementById('editor');
+const list=document.getElementById('categories');
+let token='',menu=null;
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const status=(el,msg,kind='')=>{el.textContent=msg;el.className='status '+kind};
+const api=async(path,opts={})=>{
+ const res=await fetch('https://api.github.com'+path,{...opts,headers:{Accept:'application/vnd.github+json',Authorization:'Bearer '+token,'X-GitHub-Api-Version':'2022-11-28',...(opts.headers||{})}});
+ const data=await res.json().catch(()=>({}));
+ if(!res.ok)throw Error(data.message||('GitHub respondió '+res.status));
+ return data;
+};
+const decode=s=>decodeURIComponent(Array.from(atob(s.replace(/\s/g,'')),c=>'%'+c.charCodeAt(0).toString(16).padStart(2,'0')).join(''));
+const encode=s=>btoa(unescape(encodeURIComponent(s)));
+function render(){
+ list.innerHTML=menu.categories.map((cat,ci)=>'<section class="category">'+
+ '<div class="category-head"><label>Categoría<input data-kind="category" data-ci="'+ci+'" value="'+esc(cat.name)+'"></label>'+
+ '<button class="danger" data-action="remove-category" data-ci="'+ci+'">Eliminar</button></div>'+
+ '<div class="product-head"><span>Licor</span><span>Precio MXN</span><span></span></div>'+
+ (cat.products||[]).map((p,pi)=>'<div class="product">'+
+ '<input data-kind="product-name" data-ci="'+ci+'" data-pi="'+pi+'" value="'+esc(p.name)+'" placeholder="Nombre del licor" aria-label="Nombre del licor">'+
+ '<div class="price"><span>$</span><input type="number" min="0" step="1" data-kind="product-price" data-ci="'+ci+'" data-pi="'+pi+'" value="'+esc(p.price_mxn)+'" placeholder="0" aria-label="Precio en pesos mexicanos"></div>'+
+ '<button class="danger" data-action="remove-product" data-ci="'+ci+'" data-pi="'+pi+'" aria-label="Eliminar licor">✕</button></div>').join('')+
+ '<div class="actions"><button data-action="add-product" data-ci="'+ci+'">＋ Agregar licor</button></div></section>').join('');
+}
+async function connect(){
+ token=tokenInput.value.trim()||localStorage.getItem('balam-menu-token')||'';
+ if(!token){status(loginStatus,'Pega tu token para continuar.','error');return}
+ status(loginStatus,'Conectando con GitHub…');
+ try{
+  const file=await api('/repos/'+repo+'/contents/menu-data.json?ref='+branch);
+  menu=JSON.parse(decode(file.content));
+  if(!Array.isArray(menu.categories))throw Error('El archivo del menú no tiene el formato esperado.');
+  if(document.getElementById('remember').checked)localStorage.setItem('balam-menu-token',token);
+  else localStorage.removeItem('balam-menu-token');
+  render();editor.hidden=false;status(loginStatus,'Conectado. Ya puedes editar.','ok');
+ }catch(err){token='';status(loginStatus,'No se pudo conectar: '+err.message+'. Revisa el token y sus permisos.','error')}
+}
+document.getElementById('connect').onclick=connect;
+tokenInput.onkeydown=e=>{if(e.key==='Enter')connect()};
+list.addEventListener('input',e=>{
+ const el=e.target,ci=Number(el.dataset.ci);
+ if(el.dataset.kind==='category')menu.categories[ci].name=el.value;
+ if(el.dataset.kind==='product-name')menu.categories[ci].products[Number(el.dataset.pi)].name=el.value;
+ if(el.dataset.kind==='product-price'){const v=el.value;menu.categories[ci].products[Number(el.dataset.pi)].price_mxn=v===''?'':Number(v)}
+});
+list.addEventListener('click',e=>{
+ const b=e.target.closest('button[data-action]');if(!b)return;
+ const ci=Number(b.dataset.ci),pi=Number(b.dataset.pi),cat=menu.categories[ci];
+ if(b.dataset.action==='add-product'){cat.products||=[];cat.products.push({id:'p-'+Date.now(),name:'',price_mxn:''})}
+ if(b.dataset.action==='remove-product')cat.products.splice(pi,1);
+ if(b.dataset.action==='remove-category'){if(!confirm('¿Eliminar “'+cat.name+'” y todos sus productos?'))return;menu.categories.splice(ci,1)}
+ render();
+});
+document.getElementById('add-category').onclick=()=>{menu.categories.push({id:'cat-'+Date.now(),name:'NUEVA CATEGORÍA',products:[]});render();list.lastElementChild?.scrollIntoView({behavior:'smooth',block:'center'})};
+document.getElementById('save').onclick=async()=>{
+ if(!menu||!token)return;
+ if(menu.categories.some(c=>!c.name.trim())||menu.categories.some(c=>(c.products||[]).some(p=>!p.name.trim()||(p.price_mxn!==''&&Number(p.price_mxn)<0)))){status(saveStatus,'Revisa los nombres de categorías, licores y precios.','error');return}
+ const btn=document.getElementById('save');btn.disabled=true;status(saveStatus,'Guardando cambios…');
+ try{
+  const path='/repos/'+repo+'/contents/menu-data.json',current=await api(path+'?ref='+branch);
+  await api(path,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:'Actualizar menú desde editor web',content:encode(JSON.stringify(menu,null,2)+'\n'),sha:current.sha,branch})});
+  status(saveStatus,'¡Guardado! El QR y la dirección del menú siguen iguales; espera un momento y recarga para ver los cambios.','ok');
+ }catch(err){status(saveStatus,'No se pudo guardar: '+err.message+'. Revisa los permisos del token.','error')}
+ finally{btn.disabled=false}
+};
+document.getElementById('logout').onclick=()=>{localStorage.removeItem('balam-menu-token');token='';menu=null;tokenInput.value='';editor.hidden=true;status(loginStatus,'Token borrado de este dispositivo.','ok')};
+const saved=localStorage.getItem('balam-menu-token');if(saved){token=saved;tokenInput.value=saved;connect()}
+})();
+</script>
+</body>
+</html>
