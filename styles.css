@@ -32,22 +32,24 @@ body {
   padding: 0 3% 45px;
 
   background-color: #030201;
-  background-image: url("fondo-balam.png");
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-image: none;
 }
 
 /* ENCABEZADO: EL JAGUAR YA ESTÁ EN LA IMAGEN */
 
 .masthead {
   position: relative;
-  height: clamp(300px, 25vw, 385px);
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   padding: 0;
-  margin: 0;
+  margin: 0 0 30px;
   overflow: hidden;
-  text-align: center;
-  background: none;
+  background-color: #030201;
+  background-image: url("fondo-balam.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .jaguar,
@@ -116,45 +118,21 @@ body {
 
 .menu {
   display: grid;
-  grid-template-columns:
-    minmax(0, 1fr)
-    minmax(0, 1.05fr)
-    minmax(0, 1fr);
-  grid-template-areas:
-    "champagne tequila cognac"
-    "vodka tequila whisky"
-    ". tequila gin";
-  gap: 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
   align-items: start;
 }
 
-.category-champagne {
-  grid-area: champagne;
+.menu-column {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 40px;
 }
 
-.category-vodka {
-  grid-area: vodka;
-}
-
-.category-tequila {
-  grid-area: tequila;
-  align-self: stretch;
-}
-
-.category-cognac {
-  grid-area: cognac;
-}
-
-.category-whisky {
-  grid-area: whisky;
-}
-
-.category-gin {
-  grid-area: gin;
-}
-
-.category-other {
-  grid-column: auto;
+.category {
+  grid-area: auto;
+  align-self: start;
 }
 
 /* CAJAS DORADAS */
@@ -162,7 +140,7 @@ body {
 .category {
   position: relative;
   min-width: 0;
-  margin-top: 20px;
+  margin-top: 0;
   padding: 25px 16px 18px;
 
   border: 2px solid #e9b65b;
@@ -259,13 +237,12 @@ footer {
     padding: 0 15px 35px;
   }
 
-  .masthead {
-    height: clamp(185px, 25vw, 260px);
-  }
-
   .menu {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-areas: none;
+  }
+
+  .menu-column {
+    display: contents;
   }
 
   .category,
@@ -289,7 +266,7 @@ footer {
   }
 
   .masthead {
-    height: clamp(115px, 25vw, 165px);
+    margin-bottom: 22px;
   }
 
   .masthead h1 {
@@ -307,8 +284,11 @@ footer {
 
   .menu {
     grid-template-columns: 1fr;
-    grid-template-areas: none;
-    gap: 18px;
+    gap: 22px;
+  }
+
+  .menu-column {
+    display: contents;
   }
 
   .category,
