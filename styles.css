@@ -342,10 +342,6 @@ footer {
 }
 
 
-/* The background artwork already contains the BALAM lettering and bottle-service title. */
-.masthead {
-  height: clamp(300px, 25vw, 385px);
-}
 .masthead h1,
 .masthead .brand,
 .masthead .club,
