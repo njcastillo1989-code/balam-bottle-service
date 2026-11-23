@@ -47,11 +47,6 @@ function draw() {
   const data = window.balam;
   if (!data || !Array.isArray(data.categories)) return;
 
-  const note = document.getElementById('note');
-  if (note) {
-    note.textContent = data.notice || 'Todos los precios están en pesos mexicanos (MXN).';
-  }
-
   root.innerHTML = data.categories.map(category => {
     const type = categoryType(category.name);
     const products = Array.isArray(category.products) ? category.products : [];
