@@ -449,8 +449,6 @@ footer {
 .jaguar-spots,
 .jaguar-eye { fill: #3a2108; }
 
-*/
-
 .roaming-jaguar::after {
   content: "✦";
   position: absolute;
