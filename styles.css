@@ -134,6 +134,16 @@ body {
   align-self: start;
 }
 
+/* DESTELLO DORADO QUE RECORRE CADA MARCO */
+@property --balam-border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes balam-border-glint {
+  to { --balam-border-angle: 1turn; }
+}
 /* CAJAS DORADAS */
 
 .category {
@@ -142,10 +152,22 @@ body {
   margin-top: 0;
   padding: 19px 12px 14px;
 
-  border: 2px solid #e9b65b;
+  --balam-border-angle: 0deg;
+  border: 2px solid transparent;
   border-radius: 17px;
 
-  background: rgba(0, 0, 0, .88);
+  background:
+    linear-gradient(rgba(0, 0, 0, .88), rgba(0, 0, 0, .88)) padding-box,
+    conic-gradient(
+      from var(--balam-border-angle),
+      #e9b65b 0deg 319deg,
+      #bd7824 323deg,
+      #ffd477 329deg,
+      #fff8dc 333deg,
+      #ffd477 337deg,
+      #e9b65b 344deg 360deg
+    ) border-box;
+  animation: balam-border-glint 7s linear infinite;
 
   box-shadow:
     0 0 13px rgba(255, 179, 44, .45),
@@ -345,3 +367,15 @@ footer {
 .category-vodka { order: 5; }
 .category-gin { order: 6; }
 .category-other { order: 99; }
+
+/* Keep the highlight moving around each frame at a different pace. */
+.category-champagne { animation-delay: -0.4s; }
+.category-tequila { animation-delay: -1.6s; }
+.category-cognac { animation-delay: -2.8s; }
+.category-vodka { animation-delay: -3.7s; }
+.category-whisky { animation-delay: -4.6s; }
+.category-gin { animation-delay: -5.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .category { animation: none; }
+}
