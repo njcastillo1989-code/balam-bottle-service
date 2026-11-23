@@ -379,3 +379,41 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .category { animation: none; }
 }
+
+/* Soft pulse localized over the BALAM word in the background artwork. */
+.masthead::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 60%;
+  left: 50%;
+  width: 34%;
+  height: 20%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 246, 211, .72) 0%, rgba(255, 192, 74, .36) 38%, rgba(255, 161, 35, .12) 62%, transparent 76%);
+  filter: blur(3px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  pointer-events: none;
+  animation: balam-logo-flash 3.8s ease-in-out infinite;
+}
+
+@keyframes balam-logo-flash {
+  0%, 67%, 100% { opacity: 0; }
+  72% { opacity: .9; }
+  77% { opacity: .2; }
+  82% { opacity: .78; }
+  88% { opacity: 0; }
+}
+
+@media (max-width: 600px) {
+  .masthead::after {
+    width: 44%;
+    height: 20%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .masthead::after { animation: none; }
+}
