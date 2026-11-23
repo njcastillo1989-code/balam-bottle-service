@@ -266,7 +266,8 @@ footer {
   }
 
   .masthead {
-    margin-bottom: 22px;
+    aspect-ratio: 3.4 / 1;
+    margin-bottom: 18px;
   }
 
   .masthead h1 {
