@@ -262,6 +262,7 @@ footer {
 @media (max-width: 600px) {
   .shell {
     padding: 0 12px 25px;
+    background-size: 145% auto;
   }
 
   .masthead {
