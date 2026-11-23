@@ -409,3 +409,75 @@ footer {
   .category { animation: none; }
   .masthead::after { animation: none; opacity: 0; }
 }
+
+
+/* A tiny golden jaguar runs around each bottle category frame. */
+.roaming-jaguar {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  line-height: 1;
+  offset-path: inset(3px round 14px);
+  offset-distance: 0%;
+  offset-rotate: 0deg;
+  animation: jaguar-around-frame 15s linear infinite;
+  filter: grayscale(1) sepia(1) saturate(6) hue-rotate(350deg) drop-shadow(0 0 4px #ffc65b);
+  pointer-events: none;
+}
+
+.roaming-jaguar::after {
+  content: "✦";
+  position: absolute;
+  right: 16px;
+  top: -2px;
+  color: #fff2ba;
+  font-size: 9px;
+  text-shadow: 0 0 5px #ffb62e;
+  animation: spark-trail .8s ease-in-out infinite alternate;
+}
+
+@keyframes jaguar-around-frame {
+  to { offset-distance: 100%; }
+}
+
+@keyframes spark-trail {
+  from { opacity: .25; transform: scale(.65); }
+  to { opacity: 1; transform: scale(1.15); }
+}
+
+.category h2,
+.product {
+  position: relative;
+  z-index: 2;
+}
+
+.category-champagne .roaming-jaguar { animation-delay: -1s; }
+.category-tequila .roaming-jaguar { animation-delay: -3.2s; }
+.category-cognac .roaming-jaguar { animation-delay: -5.4s; }
+.category-whisky .roaming-jaguar { animation-delay: -7.1s; }
+.category-vodka .roaming-jaguar { animation-delay: -9.3s; }
+.category-gin .roaming-jaguar { animation-delay: -11.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .roaming-jaguar,
+  .roaming-jaguar::after { animation: none; }
+}
+
+@supports not (offset-path: inset(3px round 14px)) {
+  .roaming-jaguar {
+    top: -11px;
+    left: 50%;
+    animation: jaguar-fallback 7s ease-in-out infinite alternate;
+  }
+
+  @keyframes jaguar-fallback {
+    from { transform: translateX(-150px); }
+    to { transform: translateX(150px); }
+  }
+}
