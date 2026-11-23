@@ -25,6 +25,7 @@ body {
 /* FONDO ORIGINAL BALAM */
 
 .shell {
+  position: relative;
   width: 100%;
   max-width: 1536px;
   min-height: 100vh;
@@ -134,16 +135,6 @@ body {
   align-self: start;
 }
 
-/* DESTELLO DORADO QUE RECORRE CADA MARCO */
-@property --balam-border-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes balam-border-glint {
-  to { --balam-border-angle: 1turn; }
-}
 /* CAJAS DORADAS */
 
 .category {
@@ -152,22 +143,11 @@ body {
   margin-top: 0;
   padding: 19px 12px 14px;
 
-  --balam-border-angle: 0deg;
-  border: 2px solid transparent;
+  border: 2px solid #e9b65b;
   border-radius: 17px;
 
-  background:
-    linear-gradient(rgba(0, 0, 0, .88), rgba(0, 0, 0, .88)) padding-box,
-    conic-gradient(
-      from var(--balam-border-angle),
-      #e9b65b 0deg 319deg,
-      #bd7824 323deg,
-      #ffd477 329deg,
-      #fff8dc 333deg,
-      #ffd477 337deg,
-      #e9b65b 344deg 360deg
-    ) border-box;
-  animation: balam-border-glint 7s linear infinite;
+  background: rgba(0, 0, 0, .88);
+  animation: category-short-circuit 4.3s steps(1, end) infinite;
 
   box-shadow:
     0 0 13px rgba(255, 179, 44, .45),
@@ -282,6 +262,8 @@ footer {
 /* CELULARES */
 
 @media (max-width: 600px) {
+  .logo-layer { width: 145%; }
+
   .shell {
     padding: 0 12px 25px;
     background-size: 145% auto;
@@ -368,52 +350,68 @@ footer {
 .category-gin { order: 6; }
 .category-other { order: 99; }
 
-/* Keep the highlight moving around each frame at a different pace. */
-.category-champagne { animation-delay: -0.4s; }
-.category-tequila { animation-delay: -1.6s; }
-.category-cognac { animation-delay: -2.8s; }
-.category-vodka { animation-delay: -3.7s; }
-.category-whisky { animation-delay: -4.6s; }
-.category-gin { animation-delay: -5.5s; }
+/* Short-circuit flicker on the gold category frames. */
+@keyframes category-short-circuit {
+  0%, 9%, 11%, 31%, 33%, 63%, 65%, 100% {
+    border-color: #f4c766;
+    box-shadow: 0 0 15px rgba(255, 179, 44, .65), inset 0 0 12px rgba(186, 106, 11, .24);
+  }
+  10%, 32%, 64% {
+    border-color: #6f4b18;
+    box-shadow: 0 0 2px rgba(255, 179, 44, .12), inset 0 0 3px rgba(186, 106, 11, .08);
+  }
+}
+
+.category-champagne { animation-delay: -.3s; }
+.category-tequila { animation-delay: -1.1s; }
+.category-cognac { animation-delay: -1.8s; }
+.category-vodka { animation-delay: -2.6s; }
+.category-whisky { animation-delay: -3.2s; }
+.category-gin { animation-delay: -3.8s; }
 
 @media (prefers-reduced-motion: reduce) {
   .category { animation: none; }
 }
 
-/* Soft pulse localized over the BALAM word in the background artwork. */
-.masthead::after {
-  content: "";
+/* Flicker the BALAM word separately from the artwork. */
+.logo-layer {
   position: absolute;
-  z-index: 0;
-  top: 60%;
+  top: 0;
   left: 50%;
-  width: 34%;
-  height: 20%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(255, 246, 211, .72) 0%, rgba(255, 192, 74, .36) 38%, rgba(255, 161, 35, .12) 62%, transparent 76%);
-  filter: blur(3px);
-  mix-blend-mode: screen;
-  opacity: 0;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 1640 / 918;
+  overflow: hidden;
+  transform: translateX(-50%);
   pointer-events: none;
-  animation: balam-logo-flash 3.8s ease-in-out infinite;
 }
 
-@keyframes balam-logo-flash {
-  0%, 67%, 100% { opacity: 0; }
-  72% { opacity: .9; }
-  77% { opacity: .2; }
-  82% { opacity: .78; }
-  88% { opacity: 0; }
+.logo-layer svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-@media (max-width: 600px) {
-  .masthead::after {
-    width: 44%;
-    height: 20%;
-  }
+.balam-lit {
+  animation: balam-short-circuit 4.1s steps(1, end) infinite;
+}
+
+@keyframes balam-short-circuit {
+  0%, 12%, 14%, 40%, 43%, 72%, 75%, 100% { opacity: 1; }
+  13%, 41%, 74% { opacity: 0; }
+  46% { opacity: .28; }
+  48% { opacity: .92; }
+  50% { opacity: .16; }
+  53% { opacity: 1; }
+}
+
+.menu,
+footer {
+  position: relative;
+  z-index: 2;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .masthead::after { animation: none; }
+  .category,
+  .balam-lit { animation: none; }
 }
