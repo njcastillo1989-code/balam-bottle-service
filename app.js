@@ -47,13 +47,19 @@ function draw() {
   const data = window.balam;
   if (!data || !Array.isArray(data.categories)) return;
 
-  root.innerHTML = data.categories.map(category => {
+  const columns = [[], [], []];
+
+  data.categories.forEach(category => {
     const type = categoryType(category.name);
     const products = Array.isArray(category.products) ? category.products : [];
     const items = products.length
       ? products.map(product => {
           const price = product.price_mxn !== '' && product.price_mxn != null
-            ? 'MXN $' + fmt(product.price_mxn)
+            ? 'MXN 
+}
+
+load();
+ + fmt(product.price_mxn)
             : '—';
 
           return '<div class="product">' +
@@ -63,10 +69,19 @@ function draw() {
         }).join('')
       : '<p class="empty">—</p>';
 
-    return '<section class="category category-' + type +
+    const markup = '<section class="category category-' + type +
       '" data-category="' + safe(category.name) + '">' +
       '<h2>' + safe(category.name) + '</h2>' + items + '</section>';
-  }).join('');
+
+    const column = type === 'champagne' || type === 'vodka' ? 0
+      : type === 'tequila' ? 1
+      : 2;
+    columns[column].push(markup);
+  });
+
+  root.innerHTML = columns.map(categories =>
+    '<div class="menu-column">' + categories.join('') + '</div>'
+  ).join('');
 }
 
 load();
