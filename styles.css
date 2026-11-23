@@ -344,3 +344,73 @@ footer {
 .category-vodka { order: 5; }
 .category-gin { order: 6; }
 .category-other { order: 99; }
+
+
+/* Gentle cigarette-like smoke drifting behind the menu. */
+.smoke-layer {
+  position: absolute;
+  z-index: 0;
+  inset: 15% 0 10%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shell > header,
+.shell > main,
+.shell > footer {
+  position: relative;
+  z-index: 1;
+}
+
+.smoke-wisp {
+  position: absolute;
+  bottom: -8%;
+  left: var(--smoke-left);
+  width: clamp(120px, 17vw, 250px);
+  height: 76%;
+  border-radius: 50%;
+  opacity: 0;
+  filter: blur(15px);
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(ellipse 36% 12% at 50% 94%, rgba(255, 239, 209, .18), transparent 100%),
+    radial-gradient(ellipse 31% 14% at 36% 78%, rgba(225, 228, 232, .13), transparent 100%),
+    radial-gradient(ellipse 35% 14% at 63% 60%, rgba(255, 241, 218, .14), transparent 100%),
+    radial-gradient(ellipse 30% 12% at 42% 42%, rgba(220, 225, 231, .11), transparent 100%),
+    radial-gradient(ellipse 34% 15% at 59% 22%, rgba(255, 238, 210, .12), transparent 100%);
+  animation: smoke-rise 10s ease-in-out infinite;
+}
+
+.smoke-wisp::after {
+  content: "";
+  position: absolute;
+  inset: 8% 20% 6% 30%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 44% 13% at 54% 85%, rgba(235, 236, 238, .12), transparent 100%),
+    radial-gradient(ellipse 38% 15% at 38% 56%, rgba(255, 239, 217, .11), transparent 100%),
+    radial-gradient(ellipse 42% 14% at 62% 28%, rgba(225, 229, 233, .10), transparent 100%);
+}
+
+.smoke-wisp-one { --smoke-left: 7%; animation-delay: -1.2s; }
+.smoke-wisp-two { --smoke-left: 40%; animation-delay: -5s; animation-duration: 12s; }
+.smoke-wisp-three { --smoke-left: 73%; animation-delay: -8.1s; animation-duration: 11s; }
+
+@keyframes smoke-rise {
+  0% { opacity: 0; transform: translate3d(-8px, 12%, 0) scale(.72, .68); }
+  18% { opacity: .8; }
+  55% { opacity: .58; transform: translate3d(18px, -18%, 0) scale(1.08, 1.02); }
+  100% { opacity: 0; transform: translate3d(-14px, -58%, 0) scale(1.35, 1.25); }
+}
+
+@media (max-width: 600px) {
+  .smoke-layer { inset: 19% 0 12%; }
+  .smoke-wisp { width: 38vw; height: 67%; filter: blur(12px); }
+  .smoke-wisp-one { --smoke-left: -5%; }
+  .smoke-wisp-two { --smoke-left: 31%; }
+  .smoke-wisp-three { --smoke-left: 66%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smoke-wisp { animation: none; opacity: .2; transform: none; }
+}
