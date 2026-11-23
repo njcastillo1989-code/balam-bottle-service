@@ -1,9 +1,20 @@
 
+/* ==========================================
+   BALAM NIGHT CLUB
+   BOTTLE SERVICE
+   DISEÑO NEGRO Y DORADO
+========================================== */
+
 :root {
   color-scheme: dark;
+
   --gold: #ffd477;
-  --bright: #ffad31;
-  --line: #dba74b;
+  --gold-bright: #ffad31;
+  --gold-border: #dba74b;
+
+  --background: #030201;
+  --panel: #100803;
+  --text: #ffe9b0;
 }
 
 * {
@@ -16,116 +27,190 @@ html {
 
 body {
   margin: 0;
+  min-height: 100vh;
+
   background: #030201;
-  color: #ffe9b0;
+  color: var(--text);
+
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ==========================================
+   CONTENEDOR PRINCIPAL
+========================================== */
+
 .shell {
   position: relative;
+
   width: 100%;
   max-width: 1500px;
   min-height: 100vh;
-  margin: auto;
+
+  margin: 0 auto;
   padding: 0 24px 30px;
-  border: 3px double #dba74b;
+
+  border: 3px double var(--gold-border);
 
   background:
     radial-gradient(
       ellipse at 50% 0%,
-      rgba(112, 54, 8, 0.30),
-      transparent 55%
+      rgba(122, 62, 13, 0.38),
+      transparent 45%
     ),
     linear-gradient(
       180deg,
-      #100802 0%,
-      #030201 65%,
-      #080401 100%
+      #160b04 0%,
+      #070402 45%,
+      #030201 100%
     );
 
   box-shadow:
-    inset 0 0 28px #ffad3155,
-    0 0 18px #b56d1644;
+    inset 0 0 30px rgba(255, 173, 49, 0.18),
+    0 0 20px rgba(181, 109, 22, 0.25);
 }
 
-/* =================================
+/* ==========================================
    ENCABEZADO BALAM
-================================= */
+========================================== */
 
 .masthead {
   position: relative;
-  height: clamp(210px, 23vw, 310px);
+
+  width: 100%;
+  height: auto;
+  min-height: 0;
+
   margin: 0;
-  padding: 0;
-  overflow: hidden;
+  padding: 45px 10px 20px;
+
+  overflow: visible;
   text-align: center;
-  background: transparent;
+
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(192, 106, 21, 0.20),
+      transparent 75%
+    );
 }
 
 /*
-  Imagen original únicamente
-  dentro del encabezado.
-  No se usa como fondo del menú.
+   IMPORTANTE:
+   No utilizamos carta-original.jpeg
+   porque contiene productos y precios
+   impresos que se duplicaban.
 */
 
 .jaguar {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-
-  background-image:
-    url("assets/carta-original.jpeg");
-
-  background-position: center top;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-}
-
-/*
-  El logo y título ya aparecen
-  dentro de la imagen original.
-*/
-
-.brand,
-.club,
-.masthead h1 {
   display: none;
 }
 
-.rule {
-  height: 3px;
-  margin: 8px 1% 25px;
+/* LOGOTIPO BALAM */
 
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #ffcd68,
-    transparent
-  );
+.brand {
+  display: block;
 
-  box-shadow: 0 0 10px #d98b28;
+  margin: 0;
+  padding: 0;
+
+  color: #ffd477;
+
+  font-size: clamp(48px, 9vw, 105px);
+  font-weight: 900;
+
+  line-height: 1.05;
+  letter-spacing: 0.12em;
+
+  text-shadow:
+    0 0 8px rgba(255, 177, 53, 0.75),
+    0 0 25px rgba(210, 111, 14, 0.65);
 }
 
-/* =================================
+/* NIGHT CLUB */
+
+.club {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #ffe0a0;
+
+  font-size: clamp(12px, 2vw, 20px);
+  font-weight: 800;
+
+  letter-spacing: 0.45em;
+}
+
+/* BOTTLE SERVICE */
+
+.masthead h1 {
+  display: block;
+
+  position: static;
+  transform: none;
+
+  width: auto;
+  max-width: 100%;
+
+  margin: 28px 0 8px;
+  padding: 0;
+
+  color: #ffda87;
+
+  font-size: clamp(28px, 4.5vw, 55px);
+  font-weight: 900;
+
+  line-height: 1.15;
+  letter-spacing: 0.06em;
+
+  text-align: center;
+
+  text-shadow:
+    0 2px 0 #874900,
+    0 0 14px rgba(223, 140, 33, 0.75);
+}
+
+/* LÍNEA DORADA */
+
+.rule {
+  width: 98%;
+  height: 3px;
+
+  margin: 12px auto 25px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #ffcd68,
+      transparent
+    );
+
+  box-shadow:
+    0 0 10px rgba(217, 139, 40, 0.50);
+}
+
+/* ==========================================
    SELECTOR DE IDIOMAS
-================================= */
+========================================== */
 
 .toolbar {
   position: relative;
   z-index: 2;
 
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 
   gap: 12px;
+
   margin: 0 1% 30px;
 }
 
 #langs {
   display: flex;
+  align-items: center;
   gap: 0;
 }
 
@@ -134,15 +219,17 @@ body {
 
   padding: 10px 16px;
 
-  color: #ffe7ad;
-  background: #100803;
-
   border: 1px solid #b57c29;
 
-  font-size: 13px;
-  font-weight: bold;
+  background: #100803;
+  color: #ffe7ad;
 
-  transition: 0.2s ease;
+  font-size: 13px;
+  font-weight: 800;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .toolbar button:hover {
@@ -150,18 +237,18 @@ body {
 }
 
 .toolbar button.active {
-  color: #090604;
   background: #e7ad40;
+  color: #090604;
 }
 
 .note {
-  font-size: 13px;
   color: #d8b875;
+  font-size: 13px;
 }
 
-/* =================================
-   DISTRIBUCIÓN DEL MENÚ
-================================= */
+/* ==========================================
+   DISTRIBUCIÓN DE CATEGORÍAS
+========================================== */
 
 .menu {
   display: grid;
@@ -181,31 +268,7 @@ body {
   align-items: start;
 }
 
-/* =================================
-   CAJAS DE CATEGORÍAS
-================================= */
-
-.category {
-  position: relative;
-
-  min-width: 0;
-  margin-top: 20px;
-  padding: 24px 16px 18px;
-
-  border: 2px solid #e9b65b;
-  border-radius: 17px;
-
-  background:
-    linear-gradient(
-      130deg,
-      rgba(18, 9, 3, 0.97),
-      rgba(6, 4, 3, 0.97)
-    );
-
-  box-shadow:
-    0 0 13px #ffb32c77,
-    inset 0 0 10px #ba6a0b33;
-}
+/* POSICIONES */
 
 .category-champagne {
   grid-area: champagne;
@@ -236,59 +299,112 @@ body {
   grid-column: auto;
 }
 
-/* =================================
+/* ==========================================
+   CAJAS DORADAS
+========================================== */
+
+.category {
+  position: relative;
+
+  min-width: 0;
+
+  margin-top: 20px;
+  padding: 25px 16px 18px;
+
+  border: 2px solid #e9b65b;
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(23, 11, 4, 0.97),
+      rgba(5, 3, 2, 0.98)
+    );
+
+  box-shadow:
+    0 0 13px rgba(255, 179, 44, 0.45),
+    inset 0 0 12px rgba(186, 106, 11, 0.20);
+}
+
+/* BORDE INTERIOR DECORATIVO */
+
+.category::before {
+  content: "";
+
+  position: absolute;
+  inset: 5px;
+
+  border: 1px solid rgba(255, 212, 119, 0.18);
+  border-radius: 12px;
+
+  pointer-events: none;
+}
+
+/* ==========================================
    TÍTULOS DE CATEGORÍAS
-================================= */
+========================================== */
 
 .category h2 {
   position: relative;
+  z-index: 1;
 
   width: max-content;
   max-width: 100%;
 
-  margin: -44px auto 16px;
+  margin: -45px auto 18px;
   padding: 6px 20px;
 
   border: 2px solid #f0bf65;
   border-radius: 12px;
 
   background: #100803;
-
   color: #ffd789;
 
   font-size: clamp(17px, 2vw, 24px);
   font-weight: 900;
 
+  line-height: 1.2;
   letter-spacing: 0.06em;
+
   text-align: center;
+  overflow-wrap: anywhere;
 
   box-shadow:
-    0 0 12px #e99724,
-    inset 0 0 8px #c57b2333;
+    0 0 12px rgba(233, 151, 36, 0.70),
+    inset 0 0 8px rgba(197, 123, 35, 0.20);
 }
 
-/* =================================
-   PRODUCTOS Y PRECIOS
-================================= */
+/* ==========================================
+   PRODUCTOS
+========================================== */
 
 .product {
-  display: flex;
+  position: relative;
+  z-index: 1;
 
+  display: flex;
   justify-content: space-between;
   align-items: baseline;
 
   gap: 12px;
-  padding: 4px 0;
+
+  padding: 5px 0;
+
+  color: #ffe9b0;
 
   font-size: clamp(14px, 1.4vw, 19px);
   font-weight: 700;
+  line-height: 1.3;
 }
 
 .product .name {
   flex: 1;
   min-width: 0;
+
   overflow-wrap: anywhere;
 }
+
+/* PRECIOS EN PESOS */
 
 .price {
   flex-shrink: 0;
@@ -299,14 +415,20 @@ body {
   white-space: nowrap;
 }
 
+/* PRECIOS EN DÓLARES */
+
 .usd {
   display: block;
 
-  font-size: 12px;
-  font-weight: normal;
+  margin-top: 2px;
 
   color: #c8ac7b;
+
+  font-size: 12px;
+  font-weight: normal;
 }
+
+/* MENSAJES */
 
 .empty {
   color: #b49c6d;
@@ -315,16 +437,20 @@ body {
 
 .loading {
   grid-column: 1 / -1;
+
+  color: #ffd477;
   text-align: center;
 }
 
-/* =================================
+/* ==========================================
    PIE DE PÁGINA
-================================= */
+========================================== */
 
 footer {
   margin-top: 35px;
   padding: 25px 5px 12px;
+
+  border-top: 1px solid rgba(219, 167, 75, 0.20);
 
   color: #b88e4e;
 
@@ -334,9 +460,9 @@ footer {
   text-align: center;
 }
 
-/* =================================
+/* ==========================================
    TABLETAS
-================================= */
+========================================== */
 
 @media (max-width: 950px) {
 
@@ -345,7 +471,7 @@ footer {
   }
 
   .masthead {
-    height: clamp(170px, 23vw, 250px);
+    padding: 35px 10px 15px;
   }
 
   .menu {
@@ -371,9 +497,9 @@ footer {
   }
 }
 
-/* =================================
+/* ==========================================
    CELULARES
-================================= */
+========================================== */
 
 @media (max-width: 600px) {
 
@@ -382,16 +508,26 @@ footer {
   }
 
   .masthead {
-    height: clamp(110px, 23vw, 165px);
+    padding: 28px 5px 12px;
   }
 
-  .jaguar {
-    background-position: center top;
-    background-size: 100% auto;
+  .brand {
+    font-size: clamp(43px, 11vw, 65px);
+    letter-spacing: 0.08em;
+  }
+
+  .club {
+    font-size: 12px;
+    letter-spacing: 0.30em;
+  }
+
+  .masthead h1 {
+    margin-top: 22px;
+    font-size: clamp(24px, 6vw, 34px);
   }
 
   .rule {
-    margin: 6px 1% 20px;
+    margin-bottom: 20px;
   }
 
   .toolbar {
@@ -423,18 +559,20 @@ footer {
     grid-area: auto;
     grid-column: auto;
 
-    margin-top: 16px;
+    margin-top: 18px;
     padding: 22px 13px 15px;
   }
 
   .category h2 {
-    margin-top: -40px;
+    margin-top: -41px;
+    padding: 6px 15px;
+
     font-size: 19px;
   }
 
   .product {
-    font-size: 16px;
     gap: 8px;
+    font-size: 16px;
   }
 
   footer {
