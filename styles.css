@@ -1,176 +1,95 @@
 
-/* ==========================================
-   BALAM NIGHT CLUB
-   BOTTLE SERVICE
-   PRECIOS SOLO EN PESOS MEXICANOS
-========================================== */
+/* BALAM NIGHT CLUB — BOTTLE SERVICE */
 
 :root {
   color-scheme: dark;
   --gold: #ffd477;
-  --gold-bright: #ffad31;
-  --gold-border: #dba74b;
-  --background: #030201;
-  --panel: #100803;
-  --text: #ffe9b0;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html {
+html,
+body {
+  margin: 0;
   min-height: 100%;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
   background: #030201;
-  color: var(--text);
+  color: #ffe9b0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* FONDO ORIGINAL BALAM */
 
 .shell {
-  position: relative;
   width: 100%;
-  max-width: 1500px;
+  max-width: 1536px;
   min-height: 100vh;
   margin: 0 auto;
-  padding: 0 24px 30px;
-  border: 3px double var(--gold-border);
+  padding: 0 3% 45px;
 
-  background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(122, 62, 13, 0.38),
-      transparent 45%
-    ),
-    linear-gradient(
-      180deg,
-      #160b04 0%,
-      #070402 45%,
-      #030201 100%
-    );
-
-  box-shadow:
-    inset 0 0 30px rgba(255, 173, 49, 0.18),
-    0 0 20px rgba(181, 109, 22, 0.25);
+  background-color: #030201;
+  background-image: url("fondo-balam.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-/* ENCABEZADO BALAM */
+/* ENCABEZADO: EL JAGUAR YA ESTÁ EN LA IMAGEN */
 
 .masthead {
   position: relative;
-  width: 100%;
-  height: auto;
-  min-height: 0;
+  height: clamp(300px, 25vw, 385px);
+  padding: 0;
   margin: 0;
-  padding: 45px 10px 20px;
-  overflow: visible;
+  overflow: hidden;
   text-align: center;
-
-  background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(192, 106, 21, 0.20),
-      transparent 75%
-    );
+  background: none;
 }
 
-/* Ocultamos la imagen original para
-   evitar textos y precios duplicados */
-
-.jaguar {
+.jaguar,
+.brand,
+.club {
   display: none;
 }
 
-/* LOGOTIPO */
-
-.brand {
-  display: block;
-  margin: 0;
-  padding: 0;
-  color: #ffd477;
-  font-size: clamp(48px, 9vw, 105px);
-  font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: 0.12em;
-
-  text-shadow:
-    0 0 8px rgba(255, 177, 53, 0.75),
-    0 0 25px rgba(210, 111, 14, 0.65);
-}
-
-.club {
-  display: block;
-  margin-top: 8px;
-  color: #ffe0a0;
-  font-size: clamp(12px, 2vw, 20px);
-  font-weight: 800;
-  letter-spacing: 0.45em;
-}
-
-/* BOTTLE SERVICE */
-
 .masthead h1 {
-  display: block;
-  position: static;
-  transform: none;
-  width: auto;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: max-content;
   max-width: 100%;
-  margin: 28px 0 8px;
-  padding: 0;
-  color: #ffda87;
-  font-size: clamp(28px, 4.5vw, 55px);
+  margin: 0;
+  padding: 0 8px;
+
+  color: #ffd477;
+  font-size: clamp(25px, 4vw, 55px);
   font-weight: 900;
-  line-height: 1.15;
-  letter-spacing: 0.06em;
-  text-align: center;
-
-  text-shadow:
-    0 2px 0 #874900,
-    0 0 14px rgba(223, 140, 33, 0.75);
+  letter-spacing: .06em;
+  text-shadow: 0 0 12px #d68a24;
 }
-
-/* LÍNEA DORADA */
 
 .rule {
-  width: 98%;
-  height: 3px;
-  margin: 12px auto 25px;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #ffcd68,
-      transparent
-    );
-
-  box-shadow:
-    0 0 10px rgba(217, 139, 40, 0.50);
+  display: none;
 }
 
-/* SELECTOR DE IDIOMAS */
+/* BOTONES DE IDIOMAS */
 
 .toolbar {
-  position: relative;
-  z-index: 2;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin: 0 1% 30px;
+  margin: 16px 0 42px;
 }
 
 #langs {
   display: flex;
-  align-items: center;
-  gap: 0;
 }
 
 .toolbar button {
@@ -180,12 +99,7 @@ body {
   background: #100803;
   color: #ffe7ad;
   font-size: 13px;
-  font-weight: 800;
-  transition: background 0.2s ease;
-}
-
-.toolbar button:hover {
-  background: #51300c;
+  font-weight: bold;
 }
 
 .toolbar button.active {
@@ -198,26 +112,21 @@ body {
   font-size: 13px;
 }
 
-/* DISTRIBUCIÓN DE CATEGORÍAS */
+/* DISTRIBUCIÓN DEL MENÚ */
 
 .menu {
   display: grid;
-
   grid-template-columns:
     minmax(0, 1fr)
     minmax(0, 1.05fr)
     minmax(0, 1fr);
-
   grid-template-areas:
     "champagne tequila cognac"
     "vodka tequila whisky"
     ". tequila gin";
-
   gap: 22px;
   align-items: start;
 }
-
-/* POSICIONES */
 
 .category-champagne {
   grid-area: champagne;
@@ -255,66 +164,48 @@ body {
   min-width: 0;
   margin-top: 20px;
   padding: 25px 16px 18px;
+
   border: 2px solid #e9b65b;
   border-radius: 17px;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(23, 11, 4, 0.97),
-      rgba(5, 3, 2, 0.98)
-    );
+  background: rgba(0, 0, 0, .88);
 
   box-shadow:
-    0 0 13px rgba(255, 179, 44, 0.45),
-    inset 0 0 12px rgba(186, 106, 11, 0.20);
+    0 0 13px rgba(255, 179, 44, .45),
+    inset 0 0 12px rgba(186, 106, 11, .2);
 }
-
-.category::before {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 1px solid rgba(255, 212, 119, 0.18);
-  border-radius: 12px;
-  pointer-events: none;
-}
-
-/* TÍTULOS DE CATEGORÍAS */
 
 .category h2 {
   position: relative;
-  z-index: 1;
   width: max-content;
   max-width: 100%;
   margin: -45px auto 18px;
   padding: 6px 20px;
+
   border: 2px solid #f0bf65;
   border-radius: 12px;
+
   background: #100803;
   color: #ffd789;
+
   font-size: clamp(17px, 2vw, 24px);
   font-weight: 900;
-  line-height: 1.2;
-  letter-spacing: 0.06em;
+  letter-spacing: .06em;
   text-align: center;
   overflow-wrap: anywhere;
 
-  box-shadow:
-    0 0 12px rgba(233, 151, 36, 0.70),
-    inset 0 0 8px rgba(197, 123, 35, 0.20);
+  box-shadow: 0 0 12px rgba(233, 151, 36, .7);
 }
 
 /* PRODUCTOS */
 
 .product {
-  position: relative;
-  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
   padding: 5px 0;
-  color: #ffe9b0;
+
   font-size: clamp(14px, 1.4vw, 19px);
   font-weight: 700;
   line-height: 1.3;
@@ -326,7 +217,7 @@ body {
   overflow-wrap: anywhere;
 }
 
-/* PRECIOS EN PESOS MEXICANOS */
+/* SOLO PESOS MEXICANOS */
 
 .price {
   flex-shrink: 0;
@@ -336,23 +227,18 @@ body {
   white-space: nowrap;
 }
 
-/* OCULTAR TODOS LOS PRECIOS EN USD */
-
 .usd {
   display: none !important;
 }
 
-/* MENSAJES */
-
-.empty {
-  color: #b49c6d;
+.empty,
+.loading {
   text-align: center;
+  color: #d8b875;
 }
 
 .loading {
   grid-column: 1 / -1;
-  color: #ffd477;
-  text-align: center;
 }
 
 /* PIE DE PÁGINA */
@@ -360,10 +246,9 @@ body {
 footer {
   margin-top: 35px;
   padding: 25px 5px 12px;
-  border-top: 1px solid rgba(219, 167, 75, 0.20);
   color: #b88e4e;
   font-size: 12px;
-  letter-spacing: 0.15em;
+  letter-spacing: .15em;
   text-align: center;
 }
 
@@ -371,18 +256,16 @@ footer {
 
 @media (max-width: 950px) {
   .shell {
-    padding: 0 14px 25px;
+    padding: 0 15px 35px;
   }
 
   .masthead {
-    padding: 35px 10px 15px;
+    height: clamp(185px, 25vw, 260px);
   }
 
   .menu {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas: none;
-    gap: 20px;
   }
 
   .category,
@@ -394,7 +277,6 @@ footer {
   .category-gin,
   .category-other {
     grid-area: auto;
-    grid-column: auto;
     align-self: start;
   }
 }
@@ -403,34 +285,19 @@ footer {
 
 @media (max-width: 600px) {
   .shell {
-    padding: 0 12px 20px;
+    padding: 0 12px 25px;
   }
 
   .masthead {
-    padding: 28px 5px 12px;
-  }
-
-  .brand {
-    font-size: clamp(43px, 11vw, 65px);
-    letter-spacing: 0.08em;
-  }
-
-  .club {
-    font-size: 12px;
-    letter-spacing: 0.30em;
+    height: clamp(115px, 25vw, 165px);
   }
 
   .masthead h1 {
-    margin-top: 22px;
-    font-size: clamp(24px, 6vw, 34px);
-  }
-
-  .rule {
-    margin-bottom: 20px;
+    font-size: clamp(18px, 5vw, 26px);
   }
 
   .toolbar {
-    margin-bottom: 30px;
+    margin: 12px 0 30px;
   }
 
   .toolbar button {
@@ -439,7 +306,7 @@ footer {
   }
 
   .menu {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: 1fr;
     grid-template-areas: none;
     gap: 18px;
   }
@@ -453,7 +320,7 @@ footer {
   .category-gin,
   .category-other {
     grid-area: auto;
-    grid-column: auto;
+    align-self: start;
     margin-top: 18px;
     padding: 22px 13px 15px;
   }
@@ -465,48 +332,11 @@ footer {
   }
 
   .product {
-    gap: 8px;
     font-size: 16px;
+    gap: 8px;
   }
 
   footer {
     font-size: 10px;
   }
 }
-/* CORRECCIÓN ENCABEZADO BALAM */
-
-.masthead {
-  height: clamp(360px, 30vw, 450px) !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-}
-
-.jaguar {
-  display: block !important;
-  position: absolute !important;
-  inset: 0 !important;
-  height: 100% !important;
-  background-image: url("assets/carta-original.jpeg") !important;
-  background-position: center top !important;
-  background-size: 100% auto !important;
-  background-repeat: no-repeat !important;
-}
-
-.brand,
-.club,
-.masthead h1 {
-  display: none !important;
-}
-
-/* PRECIOS SOLO EN MXN */
-
-.usd {
-  display: none !important;
-}
-
-@media (max-width: 600px) {
-  .masthead {
-    height: clamp(135px, 30vw, 220px) !important;
-  }
-}
-
