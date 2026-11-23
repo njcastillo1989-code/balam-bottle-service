@@ -1,0 +1,248 @@
+{
+  "title": "BOTTLE SERVICE",
+  "currency": "MXN",
+  "categories": [
+    {
+      "id": "cat1",
+      "name": "CHAMPAGNE",
+      "products": [
+        {
+          "id": "p0_0",
+          "name": "Moët Chandon Brut",
+          "price_mxn": 6800,
+          "price_usd": ""
+        },
+        {
+          "id": "p0_1",
+          "name": "Moët Chandon Rosé",
+          "price_mxn": 6800,
+          "price_usd": ""
+        },
+        {
+          "id": "p0_2",
+          "name": "Moët Ice",
+          "price_mxn": 6800,
+          "price_usd": ""
+        },
+        {
+          "id": "p0_3",
+          "name": "Moët Ice Rosé",
+          "price_mxn": 6800,
+          "price_usd": ""
+        },
+        {
+          "id": "p0_4",
+          "name": "Veuve Clicquot Brut",
+          "price_mxn": 6800,
+          "price_usd": ""
+        },
+        {
+          "id": "p0_5",
+          "name": "Armand de Brignac Gold",
+          "price_mxn": 50000,
+          "price_usd": ""
+        },
+        {
+          "id": "p0_6",
+          "name": "Dom Pérignon",
+          "price_mxn": 23000,
+          "price_usd": ""
+        },
+        {
+          "id": "p0_7",
+          "name": "Dom Pérignon Luminous",
+          "price_mxn": 27000,
+          "price_usd": ""
+        },
+        {
+          "id": "p0_8",
+          "name": "Champagne Cristal",
+          "price_mxn": 25000,
+          "price_usd": ""
+        }
+      ]
+    },
+    {
+      "id": "cat2",
+      "name": "TEQUILA",
+      "products": [
+        {
+          "id": "p1_0",
+          "name": "Don Julio Blanco",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p1_1",
+          "name": "Don Julio Reposado",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p1_2",
+          "name": "Don Julio 70",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p1_3",
+          "name": "Patrón Silver",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p1_4",
+          "name": "Patrón Reposado",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p1_5",
+          "name": "Casa Amigos Blanco",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p1_6",
+          "name": "Casa Amigos Reposado",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p1_7",
+          "name": "Maestro Dobel Diamante",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p1_8",
+          "name": "Don Julio 1942",
+          "price_mxn": 18000,
+          "price_usd": ""
+        },
+        {
+          "id": "p1_9",
+          "name": "Clase Azul Reposado",
+          "price_mxn": 18000,
+          "price_usd": ""
+        }
+      ]
+    },
+    {
+      "id": "cat3",
+      "name": "COGNAC / BRANDY",
+      "products": [
+        {
+          "id": "p2_0",
+          "name": "Hennessy VS",
+          "price_mxn": 5500,
+          "price_usd": ""
+        },
+        {
+          "id": "p2_1",
+          "name": "Hennessy VSOP",
+          "price_mxn": 5500,
+          "price_usd": ""
+        },
+        {
+          "id": "p2_2",
+          "name": "Rémy Martin VSOP",
+          "price_mxn": 5500,
+          "price_usd": ""
+        },
+        {
+          "id": "p2_3",
+          "name": "Martell VSOP",
+          "price_mxn": 5500,
+          "price_usd": ""
+        }
+      ]
+    },
+    {
+      "id": "cat4",
+      "name": "WHISKY",
+      "products": [
+        {
+          "id": "p3_0",
+          "name": "JW Black Label",
+          "price_mxn": 5500,
+          "price_usd": ""
+        },
+        {
+          "id": "p3_1",
+          "name": "Crown Royal",
+          "price_mxn": 5500,
+          "price_usd": ""
+        },
+        {
+          "id": "p3_2",
+          "name": "Jack Daniel’s",
+          "price_mxn": 5500,
+          "price_usd": ""
+        },
+        {
+          "id": "p3_3",
+          "name": "Buchanan’s 12",
+          "price_mxn": 5500,
+          "price_usd": ""
+        }
+      ]
+    },
+    {
+      "id": "cat5",
+      "name": "VODKA",
+      "products": [
+        {
+          "id": "p4_0",
+          "name": "Grey Goose",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p4_1",
+          "name": "Belvedere",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p4_2",
+          "name": "Tito’s",
+          "price_mxn": 5900,
+          "price_usd": ""
+        },
+        {
+          "id": "p4_3",
+          "name": "Ketel One",
+          "price_mxn": 5900,
+          "price_usd": ""
+        }
+      ]
+    },
+    {
+      "id": "cat6",
+      "name": "GIN",
+      "products": [
+        {
+          "id": "p5_0",
+          "name": "Bombay Sapphire",
+          "price_mxn": 4800,
+          "price_usd": ""
+        },
+        {
+          "id": "p5_1",
+          "name": "Hendrick’s",
+          "price_mxn": 4800,
+          "price_usd": ""
+        },
+        {
+          "id": "p5_2",
+          "name": "Tanqueray",
+          "price_mxn": 4800,
+          "price_usd": ""
+        }
+      ]
+    }
+  ],
+  "notice_en": "",
+  "notice_es": ""
+}
